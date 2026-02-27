@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cálculo de Resistência</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e9ecef, #f8f9fa);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            width: 360px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        label {
+            font-size: 14px;
+            margin-top: 12px;
+            display: block;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: #2c7be5;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            border: none;
+            background-color: #2c7be5;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background-color: #1a68d1;
+        }
+
+        .resultado {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .card {
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        /* 🔹 Nominal em Verde */
+        .nominal {
+            background-color: #e8f5e9;
+            color: #1b5e20;
+            font-size: 22px;
+            padding: 18px;
+        }
+
+        /* 🔹 Mínimo em Amarelo */
+        .minimo {
+            background-color: #fff8e1;
+            color: #f57f17;
+        }
+
+        /* 🔹 Máximo permanece Vermelho */
+        .maximo {
+            background-color: #ffebee;
+            color: #b71c1c;
+        }
+
+        .erro {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Cálculo de Resistência</h2>
+
+    <label>Tensão (V)</label>
+    <input type="number" id="tensao" placeholder="Ex: 220">
+
+    <label>Potência (W/m)</label>
+    <input type="number" id="potencia" placeholder="Ex: 15">
+
+    <label>Comprimento (mm)</label>
+    <input type="number" id="comprimento" placeholder="Ex: 2500">
+
+    <button onclick="calcular()">Consultar</button>
+
+    <div class="resultado" id="resultado"></div>
+    <div class="erro" id="erro"></div>
+</div>
+
+<script>
+function calcular() {
+    const tensao = parseFloat(document.getElementById("tensao").value);
+    const potencia = parseFloat(document.getElementById("potencia").value);
+    const comprimento = parseFloat(document.getElementById("comprimento").value);
+
+    const resultadoDiv = document.getElementById("resultado");
+    const erroDiv = document.getElementById("erro");
+
+    resultadoDiv.innerHTML = "";
+    erroDiv.innerHTML = "";
+
+    if (tensao > 0 && potencia > 0 && comprimento > 0) {
+
+        const potenciaTotal = potencia * (comprimento / 1000);
+        const resistencia = (tensao * tensao) / potenciaTotal;
+
+        const minimo = resistencia * 0.9;
+        const maximo = resistencia * 1.1;
+
+        resultadoDiv.innerHTML = `
+            <div class="card nominal">
+                Valor Nominal<br>
+                ${resistencia.toFixed(2)} Ω
+            </div>
+
+            <div class="card minimo">
+                Mínimo (-10%): ${minimo.toFixed(2)} Ω
+            </div>
+
+            <div class="card maximo">
+                Máximo (+10%): ${maximo.toFixed(2)} Ω
+            </div>
+        `;
+
+    } else {
+        erroDiv.innerHTML = "Insira valores válidos maiores que zero.";
+    }
+}
+
+/* 🔹 Permite pressionar ENTER para calcular */
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        calcular();
+    }
+});
+</script>
+
+</body>
+</html>
