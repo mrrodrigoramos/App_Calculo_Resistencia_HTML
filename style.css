@@ -1,0 +1,102 @@
+/* Reset de layout */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #e9ecef, #f8f9fa);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    width: 360px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+label {
+    font-size: 14px;
+    margin-top: 12px;
+    display: block;
+    color: #555;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+input:focus {
+    border-color: #2c7be5;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    border: none;
+    background-color: #2c7be5;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background-color: #1a68d1;
+}
+
+.resultado {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.card {
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.nominal {
+    background-color: #e8f5e9;
+    color: #1b5e20;
+    font-size: 22px;
+}
+
+.minimo {
+    background-color: #fff8e1;
+    color: #f57f17;
+}
+
+.maximo {
+    background-color: #ffebee;
+    color: #b71c1c;
+}
+
+.erro {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+}
